@@ -1,2 +1,0 @@
-class ExceptionHandler(Exception):
-    pass
