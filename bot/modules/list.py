@@ -11,10 +11,10 @@ def list_drive(update, context):
     try:
         search = update.message.text.split(' ', maxsplit=1)[1]
     except IndexError:
-        sendMessage('<b>Send a Query along with command</b>', context.bot, update)
+        sendMessage('<b>Send a Query along with command \nFor <i>folder</i> results only:\n<code>/Find -d &lt;query&gt;</code>\n\nFor <i>file</i> results only:\n<code>/Find -f &lt;query&gt;</code></b>', context.bot, update)
         LOGGER.info("Query: None")
         return
-    reply = sendMessage('<b>Search in progress...</b>', context.bot, update)
+    reply = sendMessage('<b>Search in progress... 🙇🏻 </b>', context.bot, update)
     LOGGER.info(f"Query: {search}")
     google_drive = GoogleDriveHelper(None)
     try:
