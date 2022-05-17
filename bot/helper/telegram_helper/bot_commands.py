@@ -13,5 +13,6 @@ class _BotCommands:
         self.PingCommand = 'ping'
         self.LogCommand = 'log'
         self.HelpCommand = 'help'
+        self.HelpCommand = 'scrape'
 
 BotCommands = _BotCommands()
