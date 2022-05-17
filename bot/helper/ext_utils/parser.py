@@ -5,8 +5,13 @@ import requests
 from lxml import etree
 from urllib.parse import urlparse, parse_qs
 
+import time
+import cloudscraper
+from bs4 import BeautifulSoup
+
 from bot import APPDRIVE_EMAIL, APPDRIVE_PASS, GDTOT_CRYPT
-from bot.helper.ext_utils.exceptions import ExceptionHandler
+from bot.helper.ext_utils.exceptions import DDLException
+
 
 account = {
     'email': APPDRIVE_EMAIL, 
@@ -30,7 +35,7 @@ def gen_payload(data, boundary=f'{"-"*6}_'):
 
 def appdrive(url: str) -> str:
     if (APPDRIVE_EMAIL or APPDRIVE_PASS) is None:
-        raise ExceptionHandler("APPDRIVE_EMAIL and APPDRIVE_PASS env vars not provided")
+        raise DDLException("APPDRIVE_EMAIL and APPDRIVE_PASS env vars not provided")
     client = requests.Session()
     client.headers.update({
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
@@ -40,7 +45,7 @@ def appdrive(url: str) -> str:
     try:
         key = re.findall(r'"key",\s+"(.*?)"', res.text)[0]
     except IndexError:
-        raise ExceptionHandler("Invalid link")
+        raise DDLException("Invalid link")
     ddl_btn = etree.HTML(res.content).xpath("//button[@id='drc']")
     info = {}
     info['error'] = False
@@ -74,11 +79,11 @@ def appdrive(url: str) -> str:
     if not info['error']:
         return info
     else:
-        raise ExceptionHandler(f"{info['message']}")
+        raise DDLException(f"{info['message']}")
 
 def gdtot(url: str) -> str:
     if GDTOT_CRYPT is None:
-        raise ExceptionHandler("GDTOT_CRYPT env var not provided")
+        raise DDLException("GDTOT_CRYPT env var not provided")
     client = requests.Session()
     client.cookies.update({'crypt': GDTOT_CRYPT})
     res = client.get(url)
@@ -100,4 +105,36 @@ def gdtot(url: str) -> str:
     if not info['error']:
         return info['gdrive_link']
     else:
-        raise ExceptionHandler(f"{info['message']}")
+        raise DDLException(f"{info['message']}")
+
+
+def get_gp_link(url: str):
+    client = cloudscraper.create_scraper(allow_brotli=False)
+    p = urlparse(url)
+    final_url = f'{p.scheme}://{p.netloc}/links/go'
+
+    res = client.head(url)
+    header_loc = res.headers['location']
+    param = header_loc.split('postid=')[-1]
+    req_url = f'{p.scheme}://{p.netloc}/{param}'
+
+    p = urlparse(header_loc)
+    ref_url = f'{p.scheme}://{p.netloc}/'
+
+    h = { 'referer': ref_url }
+    res = client.get(req_url, headers=h, allow_redirects=False)
+
+    bs4 = BeautifulSoup(res.content, 'html.parser')
+    inputs = bs4.find_all('input')
+    data = { input.get('name'): input.get('value') for input in inputs }
+
+    h = {
+        'referer': ref_url,
+        'x-requested-with': 'XMLHttpRequest',
+    }
+    time.sleep(10)
+    res = client.post(final_url, headers=h, data=data)
+    try:
+        return res.json()['url'].replace('\/','/')
+    except:
+        return False
