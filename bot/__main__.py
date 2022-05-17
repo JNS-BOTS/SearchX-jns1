@@ -13,7 +13,7 @@ def start(update, context):
         if update.message.chat.type == "private":
             sendMessage("<b>Access granted</b>", context.bot, update)
         else:
-            sendMessage("<b>I'm alive :)</b>", context.bot, update)
+            sendMessage("<b>I'm alive :)\ni can Bypass GDrive links, GDTOT links, GPLinks, AppDrive\n@JNS_BOTS❤️‍🔥 </b>", context.bot, update)
         LOGGER.info('Granted: {} [{}]'.format(update.message.from_user.first_name, update.message.from_user.id))
     else:
         sendMessage("<b>Access denied</b>", context.bot, update)
@@ -43,6 +43,8 @@ For <i>file</i> results only:
 
 /{BotCommands.CloneCommand} [url]: Copy data from Drive / AppDrive / DriveApp / GDToT to Drive
 
+/scrape [url]: Copy data from GPLinks
+
 /{BotCommands.CountCommand} [drive_url]: Count data of Drive
 
 /{BotCommands.PermissionCommand} [drive_url]: Set data permission to 'Anyone with the link' (Only owner)
@@ -61,7 +63,7 @@ For <i>file</i> results only:
 
 /{BotCommands.LogCommand}: Get the log file (Only owner)
 
-/{BotCommands.HelpCommand}: Get this message
+/{BotCommands.HelpCommand}: Get this message \n\n@JNS_BOTS❤️‍🔥 
 '''
     sendMessage(help_string, context.bot, update)
 
