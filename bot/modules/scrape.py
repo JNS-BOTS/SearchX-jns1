@@ -10,20 +10,20 @@ def scrape_gp(update, context):
     try:
        query = update.message.text.split()[1]
     except:
-       sendMessage('<b>Give a link! 👀</b>', context.bot, update)
+       sendMessage('<b>send a GPLinks along with this command 👀</b>', context.bot, update)
        return
  
     if not query.startswith("https://gplinks") or query.startswith("gplinks"):
        sendMessage('<b>Sorry, all I do is scrape GPLinks URLs :(</b>', context.bot, update)
        return
 
-    m = sendMessage('<b>Please wait...</b>', context.bot, update)
+    m = sendMessage('<b>Please wait...🙇🏻  \nDont give another task 🙅 </b>', context.bot, update)
     link = get_gp_link(query)
     deleteMessage(context.bot, m)
     if not link:      
        sendMessage("Something went wrong\nTry again later..", context.bot, update)
     else:
-       sendMessage(f"<b>Here is your direct link:\n\n{link}</b>", context.bot, update)
+       sendMessage(f"<b>Here is your direct link ⬇️⬇️ \n\n{link} \n\n@JNS_BOTS❤️‍🔥</b>", context.bot, update)
 
 
 gplink_handler = CommandHandler("scrape", scrape_gp,
