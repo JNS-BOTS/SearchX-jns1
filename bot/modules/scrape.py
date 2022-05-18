@@ -9,13 +9,14 @@ from bot.helper.ext_utils.parser import get_gp_link
 
 @new_thread
 def scrape_gp(update, context):
-    
-    
-    
+    buttons = button_builder.ButtonMaker()
+    buttons.buildbutton("✨ BYPASSED LINK ✨", "https://t.me/JNS_BOTS")
+    buttons.buildbutton("❤️‍🔥 JNS_BOTS ❤️‍🔥", "https://t.me/JNS_BOTS")
+    reply_markup = InlineKeyboardMarkup(buttons.build_menu(1))
     try:
        query = update.message.text.split()[1]
     except:
-       sendMessage('<b>send a GPLinks along with this command 👀\n\n ❗️reply to the link wont wokrs❗️</b>\n👉🏻 command GpLink', context.bot, update)
+       sendMarkup('<b>send a GPLinks along with this command 👀\n\n ❗️reply to the link wont wokrs❗️</b>\n👉🏻 command GpLink', context.bot, update, reply_markup)
        return
  
     if not query.startswith("https://gplinks") or query.startswith("gplinks"):
