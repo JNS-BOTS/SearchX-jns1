@@ -8,7 +8,7 @@ from bot.helper.ext_utils.parser import get_gp_link
 
 @new_thread
 def scrape_gp(update, context):
-    buttons = button_build.ButtonMaker()
+    buttons = button_builder.ButtonMaker()
     buttons.buildbutton("JNS BOTS", "https://t.me/JNS_BOTS")
     buttons.buildbutton("JNS MOVIES", "https://t.me/JNS_MOVIES")
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
