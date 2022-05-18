@@ -31,7 +31,7 @@ def scrape_gp(update, context):
        buttons = button_builder.ButtonMaker()
        buttons.buildbutton("✨ BYPASSED LINK ✨", link)
        buttons.buildbutton("❤️‍🔥 JNS_BOTS ❤️‍🔥", "https://t.me/JNS_BOTS")
-       reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
+       reply_markup = InlineKeyboardMarkup(buttons.build_menu(1))
        sendMarkup(f"<b>Thank you for using me 💫 \n\nHere is your direct link</b>", context.bot, update, reply_markup)
 
 gplink_handler = CommandHandler("scrape", scrape_gp,
