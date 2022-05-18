@@ -235,11 +235,12 @@ class GoogleDriveHelper:
                 msg += f"\n<b>Type: </b>Folder"
                 msg += f"\n<b>SubFolders: </b>{self.total_folders}"
                 msg += f"\n<b>Files: </b>{self.total_files}\n"
+                urla = f'{self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(dir_id)}'
                 buttons = button_builder.ButtonMaker()
-                    buttons.buildbutton("☁️ Dʀɪᴠᴇ Lɪɴᴋ ☁️", f'{self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(dir_id)}')
+                    buttons.buildbutton("☁️ Dʀɪᴠᴇ Lɪɴᴋ ☁️", urla)
                 if DRIVE_INDEX_URL is not None:
                     url = requests.utils.requote_uri(f'{DRIVE_INDEX_URL}/{meta.get("name")}/')
-                    buttons.buildbutton("💡 Iɴᴅᴇx Lɪɴᴋ 💡", url)
+                    msg += f' | <a href="{url}">Index Link</a>'
             else:
                 file = self.copyFile(meta.get('id'), parent_id, status)
                 try:
