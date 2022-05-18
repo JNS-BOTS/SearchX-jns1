@@ -10,8 +10,8 @@ from bot.helper.ext_utils.parser import get_gp_link
 @new_thread
 def scrape_gp(update, context):
     buttons = button_builder.ButtonMaker()
-    buttons.buildbutton("✨ BYPASSED LINK ✨", "https://t.me/JNS_BOTS")
-    buttons.buildbutton("❤️‍🔥 JNS_BOTS ❤️‍🔥", "https://t.me/JNS_BOTS")
+    buttons.buildbutton("❤️‍🔥 JNS BOTS ❤️‍🔥", "https://t.me/JNS_BOTS")
+    buttons.buildbutton("🧲JNS LEECHS🧲", "https://t.me/JNS_MIRROR")
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(1))
     try:
        query = update.message.text.split()[1]
@@ -31,7 +31,7 @@ def scrape_gp(update, context):
     else:
        buttons = button_builder.ButtonMaker()
        buttons.buildbutton("✨ BYPASSED LINK ✨", link)
-       buttons.buildbutton("❤️‍🔥 JNS_BOTS ❤️‍🔥", "https://t.me/JNS_BOTS")
+       buttons.buildbutton("❤️‍🔥 JNS BOTS ❤️‍🔥", "https://t.me/JNS_BOTS")
        reply_markup = InlineKeyboardMarkup(buttons.build_menu(1))
        sendMarkup(f"<b>Thank you for using me 💫 \n\nHere is your direct link</b>", context.bot, update, reply_markup)
 
