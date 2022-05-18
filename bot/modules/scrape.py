@@ -14,7 +14,7 @@ def scrape_gp(update, context):
     try:
        query = update.message.text.split()[1]
     except:
-       sendMessage('<b>send a GPLinks along with this command 👀</b>', context.bot, update, reply_markup)
+       sendMessage('<b>send a GPLinks along with this command 👀</b>', context.bot, update)
        return
  
     if not query.startswith("https://gplinks") or query.startswith("gplinks"):
