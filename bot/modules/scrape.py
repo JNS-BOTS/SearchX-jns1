@@ -9,9 +9,9 @@ from bot.helper.ext_utils.parser import get_gp_link
 
 @new_thread
 def scrape_gp(update, context):
-    buttons = button_builder.ButtonMaker()
-    buttons.buildbutton("BYPASS LINK", link)
-    reply_markup = InlineKeyboardMarkup(buttons.build_menu(1))
+    
+    
+    
     try:
        query = update.message.text.split()[1]
     except:
@@ -28,6 +28,9 @@ def scrape_gp(update, context):
     if not link:      
        sendMessage("Something went wrong\nTry again later..", context.bot, update)
     else:
+       buttons = button_builder.ButtonMaker()
+       buttons.buildbutton("BYPASS LINK", link)
+       reply_markup = InlineKeyboardMarkup(buttons.build_menu(1))
        sendMarkup(f"<b>Here is your direct link ⬇️⬇️\n@JNS_BOTS❤️‍🔥</b>", context.bot, update, reply_markup)
 
 gplink_handler = CommandHandler("scrape", scrape_gp,
