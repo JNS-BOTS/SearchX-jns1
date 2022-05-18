@@ -24,7 +24,6 @@ from bot import LOGGER, DRIVE_NAME, DRIVE_ID, INDEX_URL, parent_id, \
     IS_TEAM_DRIVE, telegraph, USE_SERVICE_ACCOUNTS, DRIVE_INDEX_URL
 from bot.helper.ext_utils.bot_utils import *
 from bot.helper.telegram_helper import button_builder
-from bot.helper.telegram_helper.message_utils import sendMessage, deleteMessage, sendMarkup
 
 logging.getLogger('googleapiclient.discovery').setLevel(logging.ERROR)
 
@@ -234,10 +233,8 @@ class GoogleDriveHelper:
                 msg += f'\n<b>Size: </b>{get_readable_file_size(self.transferred_size)}'
                 msg += f"\n<b>Type: </b>Folder"
                 msg += f"\n<b>SubFolders: </b>{self.total_folders}"
-                msg += f"\n<b>Files: </b>{self.total_files}\n"
-                urla = f'{self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(dir_id)}'
-                buttons = button_builder.ButtonMaker()
-                    buttons.buildbutton("☁️ Dʀɪᴠᴇ Lɪɴᴋ ☁️", urla)
+                msg += f"\n<b>Files: </b>{self.total_files}"
+                msg += f'\n\n<a href="{self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(dir_id)}">Drive Link</a>'
                 if DRIVE_INDEX_URL is not None:
                     url = requests.utils.requote_uri(f'{DRIVE_INDEX_URL}/{meta.get("name")}/')
                     msg += f' | <a href="{url}">Index Link</a>'
@@ -250,7 +247,7 @@ class GoogleDriveHelper:
                 msg += f'<b>Filename: </b><code>{file.get("name")}</code>'
                 try:
                     msg += f'\n<b>Size: </b>{get_readable_file_size(int(meta.get("size", 0)))}'
-                    msg += f'\n<b>Type: </b>{typ}\n ⬇️⬇️'
+                    msg += f'\n<b>Type: </b>{typ}'
                     msg += f'\n\n<a href="{self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id"))}">Drive Link</a>'
                 except TypeError:
                     pass
@@ -274,8 +271,8 @@ class GoogleDriveHelper:
             else:
                 msg = str(err)
             LOGGER.error(f"{msg}")
-        return msg, InlineKeyboardMarkup(buttons.build_menu(1))
-    
+        return msg
+
     def cloneFolder(self, name, local_path, folder_id, parent_id, status):
         LOGGER.info(f"Syncing: {local_path}")
         files = self.getFilesByFolderId(folder_id)
@@ -537,5 +534,3 @@ class GoogleDriveHelper:
 
         buttons = button_builder.ButtonMaker()
         buttons.build_button("VIEW RESULTS 🗂️", f"https://telegra.ph/{self.path[0]}")
-
-        return msg, InlineKeyboardMarkup(buttons.build_menu(1))
