@@ -19,7 +19,7 @@ def scrape_gp(update, context):
        return
  
     if not query.startswith("https://gplinks") or query.startswith("gplinks"):
-       sendMessage('<b>Sorry, <i>scrape only for GPLinks URLs. you can use clone for GDrive, GdTot, AppDrive URLs</i> 🤠</b>', context.bot, update)
+       sendMessage('<b>Sorry 🤐 , <i>scrape only for GPLinks URLs. \nYou can use clone for GDrive, GdTot, AppDrive URLs</i> 🤠</b>', context.bot, update)
        return
 
     m = sendMessage('<b>Please wait a sec...🙇🏻  \nDont give another task 🙅 </b>', context.bot, update)
