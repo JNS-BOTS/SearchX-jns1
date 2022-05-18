@@ -1,4 +1,5 @@
 from telegram.ext import CommandHandler
+from telegram import InlineKeyboardMarkup
 from bot import AUTHORIZED_CHATS, dispatcher
 from bot.helper.ext_utils.bot_utils import new_thread
 from bot.helper.telegram_helper.filters import CustomFilters
