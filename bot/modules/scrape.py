@@ -28,7 +28,7 @@ def scrape_gp(update, context):
        sendMessage("Something went wrong\nTry again later..", context.bot, update)
     else:
        sendMarkup(f"<b>Here is your direct link ⬇️⬇️\n@JNS_BOTS❤️‍🔥</b>", context.bot, update, reply_markup)
-       buttons.buildbutton("JNS BOTS", link)
+       buttons.buildbutton("BYPASS LINK", link)
 
 gplink_handler = CommandHandler("scrape", scrape_gp,
                                filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
