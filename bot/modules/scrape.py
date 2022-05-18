@@ -8,10 +8,14 @@ from bot.helper.ext_utils.parser import get_gp_link
 
 @new_thread
 def scrape_gp(update, context):
+    buttons = button_build.ButtonMaker()
+    buttons.buildbutton("JNS BOTS", "https://t.me/JNS_BOTS")
+    buttons.buildbutton("JNS MOVIES", "https://t.me/JNS_MOVIES")
+    reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     try:
        query = update.message.text.split()[1]
     except:
-       sendMessage('<b>send a GPLinks along with this command 👀</b>', context.bot, update)
+       sendMarkup('<b>send a GPLinks along with this command 👀</b>', context.bot, update, reply_markup)
        return
  
     if not query.startswith("https://gplinks") or query.startswith("gplinks"):
@@ -24,7 +28,7 @@ def scrape_gp(update, context):
     if not link:      
        sendMessage("Something went wrong\nTry again later..", context.bot, update)
     else:
-       sendMessage(f"<b>Here is your direct link ⬇️⬇️ \n\n{link} \n\n@JNS_BOTS❤️‍🔥</b>", context.bot, update)
+       sendMarkup(f"<b>Here is your direct link ⬇️⬇️ \n\n{link} \n\n@JNS_BOTS❤️‍🔥</b>", context.bot, update, reply_markup)
 
 
 gplink_handler = CommandHandler("scrape", scrape_gp,
