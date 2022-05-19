@@ -224,8 +224,6 @@ class GoogleDriveHelper:
             LOGGER.error(f"{msg}")
             return msg
         msg = ""
-        buttons = button_build.ButtonMaker()   
-        buttons.buildbutton("🔎 𝐕𝐢𝐞𝐰", f"https://t.me/jintons")
         try:
             meta = self.getFileMetadata(file_id)
             status.set_source_folder(meta.get('name'), self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(meta.get('id')))
@@ -275,8 +273,8 @@ class GoogleDriveHelper:
             else:
                 msg = str(err)
             LOGGER.error(f"{msg}")
-        return msg, InlineKeyboardMarkup(buttons.build_menu(1)))
-
+        return msg
+    
     def cloneFolder(self, name, local_path, folder_id, parent_id, status):
         LOGGER.info(f"Syncing: {local_path}")
         files = self.getFilesByFolderId(folder_id)
