@@ -528,5 +528,5 @@ class GoogleDriveHelper:
               f"<b>(Time taken {time_taken}s)</b>"
 
         buttons = ButtonMaker()
-        buttons.build_button("VIEW RESULTS 🗂️", f"https://telegra.ph/{self.path[0]}")
+        buttons.buildbutton("VIEW RESULTS 🗂️", f"https://telegra.ph/{self.path[0]}")
         return msg, InlineKeyboardMarkup(buttons.build_menu(1))
