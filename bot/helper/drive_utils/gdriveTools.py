@@ -277,7 +277,7 @@ class GoogleDriveHelper:
             else:
                 msg = str(err)
             LOGGER.error(f"{msg}")
-       return msg
+        return msg
 
     def cloneFolder(self, name, local_path, folder_id, parent_id, status):
         LOGGER.info(f"Syncing: {local_path}")
