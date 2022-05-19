@@ -231,11 +231,12 @@ class GoogleDriveHelper:
                 dir_id = self.create_directory(meta.get('name'), parent_id)
                 self.cloneFolder(meta.get('name'), meta.get('name'), meta.get('id'), dir_id, status)
                 status.set_status(True)
-                msg += f'<b>Filename: </b><code>{meta.get("name")}</code>'
-                msg += f'\n<b>Size: </b>{get_readable_file_size(self.transferred_size)}'
-                msg += f"\n<b>Type: </b>Folder"
-                msg += f"\n<b>SubFolders: </b>{self.total_folders}"
-                msg += f"\n<b>Files: </b>{self.total_files}\n"
+                msg += f'<b>Thank you for using me 💫💫 \n\n</b>'
+                msg += f'<b>🗂 Filename: </b><code>{meta.get("name")}</code>'
+                msg += f'\n<b>📊 Size: </b>{get_readable_file_size(self.transferred_size)}'
+                msg += f"\n<b>🏷 Type: </b>Folder"
+                msg += f"\n<b>📁 SubFolders: </b>{self.total_folders}"
+                msg += f"\n<b>🗞 Files: </b>{self.total_files}\n"
                 msg += f'\n\n━━━━━━━━━━━\n<a href="{self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(dir_id)}">☁️ Dʀɪᴠᴇ Lɪɴᴋ ☁️</a>'
                 if DRIVE_INDEX_URL is not None:
                     url = requests.utils.requote_uri(f'{DRIVE_INDEX_URL}/{meta.get("name")}/')
@@ -245,11 +246,12 @@ class GoogleDriveHelper:
                 try:
                     typ = file.get('mimeType')
                 except:
-                    typ = 'File' 
-                msg += f'<b>Filename: </b><code>{file.get("name")}</code>'
+                    typ = 'File'
+                msg += f'<b>Thank you for using me 💫💫 \n\n</b>'
                 try:
-                    msg += f'\n<b>Size: </b>{get_readable_file_size(int(meta.get("size", 0)))}'
-                    msg += f'\n<b>Type: </b>{typ}\n'
+                    msg += f'<b>🗂 Filename: </b><code>{file.get("name")}</code>'
+                    msg += f'\n<b>📊 Size: </b>{get_readable_file_size(int(meta.get("size", 0)))}'
+                    msg += f'\n<b>🏷 Type: </b>{typ}\n'
                     msg += f'\n\n━━━━━━━━━━━\n<a href="{self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id"))}">☁️ Dʀɪᴠᴇ Lɪɴᴋ ☁️</a>'
                 except TypeError:
                     pass
@@ -322,11 +324,11 @@ class GoogleDriveHelper:
             mime_type = meta.get('mimeType')
             if mime_type == self.__G_DRIVE_DIR_MIME_TYPE:
                 self.gDrive_directory(meta)
-                msg += f'<b>Name: </b><code>{meta.get("name")}</code>'
-                msg += f'\n<b>Size: </b>{get_readable_file_size(self.total_bytes)}'
-                msg += f'\n<b>Type: </b>Folder'
-                msg += f'\n<b>SubFolders: </b>{self.total_folders}'
-                msg += f'\n<b>Files: </b>{self.total_files}'
+                msg += f'<b>🗂 Name: </b><code>{meta.get("name")}</code>'
+                msg += f'\n<b>📊Size: </b>{get_readable_file_size(self.total_bytes)}'
+                msg += f'\n<b>🏷 Type: </b>Folder'
+                msg += f'\n<b>📁 SubFolders: </b>{self.total_folders}'
+                msg += f'\n<b>🗞 Files: </b>{self.total_files}'
             else:
                 msg += f'<b>Name: </b><code>{meta.get("name")}</code>'
                 if mime_type is None:
