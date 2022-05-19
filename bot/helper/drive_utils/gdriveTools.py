@@ -241,9 +241,9 @@ class GoogleDriveHelper:
                 if DRIVE_INDEX_URL is not None:
                     url = requests.utils.requote_uri(f'{DRIVE_INDEX_URL}/{meta.get("name")}/')
                     msg += f' | <a href="{url}">Index Link</a>'
-                    buttons.build_button("JNS BOTS", "https://t.me/jns_bots")
-                    buttons.build_button("JNS MOVIES", "https://t.me/JNS_MOVIES")
-                    InlineKeyboardMarkup(buttons.build_menu(1))
+                    buttons = button_build.ButtonMaker()   
+                    buttons.buildbutton("🔎 𝐕𝐢𝐞𝐰", f"https://t.me/jintons")
+                    return msg, InlineKeyboardMarkup(buttons.build_menu(1)))
             else:
                 file = self.copyFile(meta.get('id'), parent_id, status)
                 try:
