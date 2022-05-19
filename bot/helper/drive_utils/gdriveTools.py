@@ -243,6 +243,7 @@ class GoogleDriveHelper:
                 if DRIVE_INDEX_URL is not None:
                     url = requests.utils.requote_uri(f'{DRIVE_INDEX_URL}/{meta.get("name")}/')
                     msg += f' | <a href="{url}">Index Link</a>'
+                InlineKeyboardMarkup(buttons.build_menu(1))
             else:
                 file = self.copyFile(meta.get('id'), parent_id, status)
                 try:
@@ -276,7 +277,7 @@ class GoogleDriveHelper:
             else:
                 msg = str(err)
             LOGGER.error(f"{msg}")
-       return msg, InlineKeyboardMarkup(buttons.build_menu(1))
+       return msg
 
     def cloneFolder(self, name, local_path, folder_id, parent_id, status):
         LOGGER.info(f"Syncing: {local_path}")
