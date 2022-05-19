@@ -224,6 +224,9 @@ class GoogleDriveHelper:
             LOGGER.error(f"{msg}")
             return msg
         msg = ""
+        buttons = button_build.ButtonMaker()   
+        buttons.buildbutton("🔎 𝐕𝐢𝐞𝐰", f"https://t.me/jintons")
+        InlineKeyboardMarkup(buttons.build_menu(1)))
         try:
             meta = self.getFileMetadata(file_id)
             status.set_source_folder(meta.get('name'), self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(meta.get('id')))
@@ -241,9 +244,6 @@ class GoogleDriveHelper:
                 if DRIVE_INDEX_URL is not None:
                     url = requests.utils.requote_uri(f'{DRIVE_INDEX_URL}/{meta.get("name")}/')
                     msg += f' | <a href="{url}">Index Link</a>'
-                    buttons = button_build.ButtonMaker()   
-                    buttons.buildbutton("🔎 𝐕𝐢𝐞𝐰", f"https://t.me/jintons")
-                    return msg, InlineKeyboardMarkup(buttons.build_menu(1)))
             else:
                 file = self.copyFile(meta.get('id'), parent_id, status)
                 try:
