@@ -1,10 +1,12 @@
 from telegram import InlineKeyboardButton
 
-
 class ButtonMaker:
     def __init__(self):
         self.button = []
 
+    def build_button(self, key, link):
+        self.button.append(InlineKeyboardButton(text=key, url=link))
+        
     def buildbutton(self, key, link):
         self.button.append(InlineKeyboardButton(text = key, url = link))
 
