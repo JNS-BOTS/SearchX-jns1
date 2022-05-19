@@ -238,11 +238,12 @@ class GoogleDriveHelper:
                 msg += f"\n<b>Files: </b>{self.total_files}\n⬇️⬇️"
                 msg += f'\n\n<a href="{self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(dir_id)}">Drive Link</a>'
                 buttons = button_builder.ButtonMaker()
-                buttons.buildbutton("JNS BOTS", "https://t.me/jns_bots")
-                buttons.buildbutton("JNS MOVIES", "https://t.me/JNS_MOVIES")
                 if DRIVE_INDEX_URL is not None:
                     url = requests.utils.requote_uri(f'{DRIVE_INDEX_URL}/{meta.get("name")}/')
                     msg += f' | <a href="{url}">Index Link</a>'
+                    buttons.build_button("JNS BOTS", "https://t.me/jns_bots")
+                    buttons.build_button("JNS MOVIES", "https://t.me/JNS_MOVIES")
+               InlineKeyboardMarkup(buttons.build_menu(1))
             else:
                 file = self.copyFile(meta.get('id'), parent_id, status)
                 try:
@@ -276,7 +277,7 @@ class GoogleDriveHelper:
             else:
                 msg = str(err)
             LOGGER.error(f"{msg}")
-        return msg, InlineKeyboardMarkup(buttons.build_menu(1))
+        return msg
 
     def cloneFolder(self, name, local_path, folder_id, parent_id, status):
         LOGGER.info(f"Syncing: {local_path}")
